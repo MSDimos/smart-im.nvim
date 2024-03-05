@@ -145,6 +145,10 @@ function M.allow_changing_im(node)
 			local has_none_ascii = not not string.match(node_content, none_ascii_pattern)
 			local only_symbol = not not string.match(node_content, only_symbol_pattern)
 
+			if node:type():match("string") then
+				return #node_content > 0 and (only_symbol or has_none_ascii)
+			end
+
 			return #node_content == 0 or only_symbol or has_none_ascii
 		end
 	end
